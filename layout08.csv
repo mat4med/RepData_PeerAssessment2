@@ -1,0 +1,53 @@
+LAYOUT,,,,
+Storm Events Database,,,,
+May 2008,,,,
+,,,,
+FIELD_NAME,FIELD_TYPE,FIELD_LEN,FIELD_DEC,COMMENT
+STATE__,N,5,0,State FIPS number
+STFIPS,C,2,0,NICAR-converted field for the state FIPS code 
+BGN_DATE,D,8,0,Date the storm event began
+BGN_TIME,C,12,0,Time the storm event began
+N_BGN_TME,C,4,0,NICAR-standardized time field In 24-hour format.
+TIME_ZONE,C,3,0,Time zone where the storm event occurred
+COUNTY,N,5,0,FIPS code for the county or forecast zone where storm event started
+COFIPS ,C,3,0,NICAR-converted field for the county FIPS code
+COUNTYNAME,C,200,0,"Areas hit by the storm event, listed either by counties or by National Weather Service forecast zones. “>” denotes a range of zones hit. “-” denotes a break in the zones that were hit.”"
+STATE,C,2,0,State postal code
+EVTYPE,C,30,0,Type of storm event. Take note that similar storm events can be listed using different wording e.g. “coastal flood” and “coastal flooding.” Take note of this if you want to run a query grouping by event type. 
+BGN_RANGE *,N,5,2,Point where the storm event began (in miles from BGN_LOCATI)
+BGN_AZI,C,3,0,Direction from BGN_LOCATI where storm event began
+BGN_LOCATI,C,21,0,"A fixed point, such as a city or town, given to help describe where a storm event began."
+END_DATE,D,8,0,Date the storm event ended
+END_TIME,C,12,0,Time the storm event ended
+N_END_TME,C,4,0,NICAR-standardized time field In 24-hour format.
+END_RANGE,N,5,2,Point where the storm event ended (in miles from END_LOCATI)
+END_AZI,C,3,0,Direction from END_LOCATI where storm event ended
+END_LOCATI,C,21,0,"A fixed point, such as an airport, given to help describe where a storm event ended"
+LENGTH,N,6,2,"Path of tornado, in miles, tenths and hundredths."
+WIDTH,N,5,0,"Path of tornado, in yards"
+F,C,1,0,Fujita tornado intensity scale (0=40-72 mph; 1=73-112 mph; 2=113-157 mph; 3=158-206 mph; 4=207-260 mph; 5=261-318 mph).
+MAG,N,5,0,Hail in inches (implied hundredths e.g. 175 = 1.75-inch hail); wind gusts in knots  
+FATALITIES,N,5,0,Number directly killed
+INJURIES,N,5,0,Number directly injured
+PROPDMG,N,6,2,Property damage in whole numbers and hundredths
+PROPDMGEXP,C,1,0,"A multiplier where Hundred (H), Thousand (K), Million (M), Billion (B)"
+PROPCASH,N,11,2,Combines the PROPDMG and PROPDMGEXP fields to create a numeric value (this field was created by NICAR)
+CROPDMG,N,6,2,Crop damage in whole numbers and hundredths
+CROPDMGEXP,C,1,0,"A multiplier where Hundred (H), Thousand (K), Million (M), Billion (B)"
+CROPCASH,N,11,2,Combines the CROPDMG and CROPDMGEXP fields to create a numeric value (this field was created by NICAR )
+TOTCASH,N,12,2,Combines the PROPCASH and CROPCASH fields to create a numeric value (this field was created by NICAR )
+WFO,C,3,0,National Weather Service forecast office that reported the data.  Join with ID field in wfo.dbf lookup table
+STATEOFFIC,C,75,0,The region where the event took place.
+ZONENAMES,M,10,0,"Memo field listing zone and county names where event occurred.  If COUNTYNAME field lists county FIPS codes, ZONENAMES field lists the corresponding county names.  If COUNTYNAME field lists county names, ZONENAMES field is blank."
+LATITUDE,N,4,0,Latitude where storm event began
+DEC_LAT,N,9,5,NICAR-converted latitude where storm event began. Adds the appropriate decimal places and converts minutes (the last two numbers in the previous field) into five decimal places.
+LONGITUDE,N,6,0,Longitude where storm event began
+DEC_LONG ,N,9,5,NICAR-converted longitude where storm event began. Adds the appropriate decimal places and converts minutes (the last two numbers in the previous field) into five decimal places.
+LATITUDE_E,N,5,0,Latitude where storm event ended
+DEC_LATEND ,N,9,5,NICAR-converted latitude where storm event ended. Adds the appropriate decimal places and converts minutes (the last two numbers in the previous field) into five decimal places.
+LONGITUDE_,N,6,0,Longitude where storm event ended
+DEC_LONEND,N,9,5,NICAR-converted longtitude where storm event ended. Adds the appropriate decimal places and converts minutes (the last two numbers in the previous field) into five decimal places.
+REMARKS,M,10,0,A text description of the storm event
+REFNUM,N,12,0,Disregard. An internal number for NCDC purposes only. (note: NICAR filled these numbers in for 2005)
+,,,,
+"* BGN_RANGE, BGN_AZI, and BGN_LOCATI work together to fix the starting point of an event. For instance, if the three fields read “2.00,” “S” and “Lake Charles,” then that means the event began 2 miles south of Lake Charles. These figures will not be available for large-scale events, such as floods and winter storms, where the event covers a large area and doesn't have a specific beginning point.",,,,
